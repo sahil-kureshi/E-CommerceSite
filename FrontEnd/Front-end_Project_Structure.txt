@@ -1,0 +1,51 @@
+footwear_shop_frontend/
+│
+├── public/                     # Static assets
+│   ├── index.html
+│   └── favicon.ico
+│
+├── src/
+│   ├── index.js                # Entry point
+│   ├── App.js                  # Root component
+│   ├── api/                    # API calls to FastAPI backend
+│   │   ├── axiosConfig.js      # Axios setup with base URL
+│   │   ├── productsApi.js      # Product-related API calls
+│   │   ├── ordersApi.js        # Order-related API calls
+│   │   ├── authApi.js          # Signup/Login API calls
+│   │   └── paymentsApi.js      # Razorpay integration calls
+│   │
+│   ├── components/             # Reusable UI components
+│   │   ├── Navbar.js
+│   │   ├── Footer.js
+│   │   ├── ProductCard.js
+│   │   ├── CartItem.js
+│   │   └── CheckoutButton.js
+│   │
+│   ├── pages/                  # Page-level components
+│   │   ├── Home.js             # Homepage
+│   │   ├── Products.js         # Product catalog
+│   │   ├── ProductDetail.js    # Single product view
+│   │   ├── Cart.js             # Shopping cart
+│   │   ├── Checkout.js         # Payment page
+│   │   ├── Orders.js           # Order tracking page
+│   │   ├── Signup.js           # Customer signup
+│   │   └── Login.js            # Customer login
+│   │
+│   ├── context/                # Global state management
+│   │   ├── AuthContext.js      # JWT token + user info
+│   │   └── CartContext.js      # Cart state
+│   │
+│   ├── styles/                 # CSS or Tailwind files
+│   │   ├── global.css
+│   │   └── components.css
+│   │
+│   ├── utils/                  # Helper functions
+│   │   ├── formatPrice.js
+│   │   └── authHelpers.js
+│   │
+│   └── router/                 # React Router setup
+│       └── AppRouter.js
+│
+├── package.json                # Dependencies
+├── .env                        # Environment variables (API base URL, Razorpay key)
+└── README.md                   # Documentation
