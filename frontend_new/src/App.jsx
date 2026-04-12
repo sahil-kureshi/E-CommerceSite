@@ -1,6 +1,6 @@
 import React from "react";
-import AppRouter from "./router/AppRouter";
-import { CartProvider } from "./context/CartContext";
+import AppRouter from "./router/AppRouter.jsx";
+import { CartProvider } from "./context/CartContext.jsx";
 
 function App() {
   return (

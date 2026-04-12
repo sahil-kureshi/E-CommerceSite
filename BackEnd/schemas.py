@@ -9,13 +9,26 @@ class CustomerBase(BaseModel):
     phone: Optional[str] = None
     address: Optional[str] = None
 
+class Customer(CustomerBase):
+    customer_id: int
+    class Config:
+        orm_mode = True
+
 class CustomerCreate(CustomerBase):
     password: str
 
 class CustomerResponse(CustomerBase):
     customer_id: int
-    class Config:
-        orm_mode = True
+    
+        
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+class CustomerUpdate(BaseModel):
+    name: Optional[str] = None
+    phone: Optional[str] = None
+    address: Optional[str] = None
 
 # --- Product Schemas ---
 class ProductBase(BaseModel):
@@ -66,3 +79,6 @@ class PaymentResponse(PaymentBase):
     payment_date: datetime
     class Config:
         orm_mode = True
+        
+        
+
