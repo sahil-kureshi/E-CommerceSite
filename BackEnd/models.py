@@ -10,7 +10,7 @@ class Customer(Base):
     email = Column(String(100), unique=True)
     phone = Column(String(15))
     address = Column(Text)
-    hashed_password = Column(String(255))
+    password = Column(String(255))
     orders = relationship("Order", back_populates="customer")
 
 class Product(Base):

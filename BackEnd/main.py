@@ -4,6 +4,8 @@ from sqlalchemy.orm import Session
 from routers.customers import get_current_user
 from database import SessionLocal, engine
 import models
+from config import settings
+from routers import auth
 
 models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
@@ -28,6 +30,9 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+app.include_router(auth.router)
 
 @app.get("/products")
 def list_products(db: Session = Depends(get_db)):
