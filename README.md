@@ -47,47 +47,47 @@ Code
    
 
 2. Create a virtual environment:
-bash
-python -m venv venv
-source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # Linux/Mac
+   venv\Scripts\activate      # Windows
 
 
 3. Install dependencies:
-bash
-pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
 
 
 4. Configure environment variables in .env
-code
-DATABASE_URL=mysql+pymysql://user:password@localhost/footwear_db
-JWT_SECRET=your_secret_key
-JWT_ALGORITHM=HS256
-RAZORPAY_KEY_ID=your_key_id
-RAZORPAY_KEY_SECRET=your_key_secret
+   code
+   DATABASE_URL=mysql+pymysql://user:password@localhost/footwear_db
+   JWT_SECRET=your_secret_key
+   JWT_ALGORITHM=HS256
+   RAZORPAY_KEY_ID=your_key_id
+   RAZORPAY_KEY_SECRET=your_key_secret                                                                  
 
 
 5. Run the server:
-bash
-uvicorn main:app --reload
+   ```bash
+   uvicorn main:app --reload
 
 
 **Frontend**
 
 1. Navigate to frontend:
-bash
-cd ../frontend
+   ```bash
+   cd ../frontend
 
 2. Install dependencies:
-bash
-npm install
+   ```bash
+   npm install
 
 3. Start development server:
-bash
-npm run dev
+   ```bash
+   npm run dev
 
 
 📖 **Author**
-Developed by **Sahil** — Entrepreneur, Full Stack Developer, and Data Engineer.
-Location: India.
-Focus: Scalable e‑commerce systems, AI‑driven automation, secure payment integration.
+   Developed by **Sahil** — Entrepreneur, Full Stack Developer, and Data Engineer.
+   Location: India.
+   Focus: Scalable e‑commerce systems, AI‑driven automation, secure payment integration.
