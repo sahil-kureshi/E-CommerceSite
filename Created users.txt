@@ -1,0 +1,25 @@
+sahil
+sahil@example.com
+9579124005
+Gandhi Ward Ramtek
+Sahil@1998
+
+Rahul
+rahul@example.com
+9890527841
+Nagpur
+Rahul@1999
+
+
+Sandesh
+sumit@example.com
+8879456123
+string nagar
+example@123
+
+
+babu
+babu@example.com
+7894561232
+test square
+babu@1234
