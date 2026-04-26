@@ -2,12 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from sqlalchemy.orm import Session
-<<<<<<< Updated upstream
-import models
-=======
 from .auth import *
 import models, schemas
->>>>>>> Stashed changes
 from database import get_db
 from config import settings
 
