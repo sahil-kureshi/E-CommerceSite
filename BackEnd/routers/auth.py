@@ -79,7 +79,7 @@ def get_my_profile(token: str, db: Session = Depends(get_db)):
 def update_profile(token: str, updated: schemas.CustomerUpdate, db: Session = Depends(get_db)):
     payload = decode_access_token(token)
     customer_id = int(payload.get("sub"))
-    customer = db.query(models.Customer).filter(models.Customer.customer_id == customer_id).first()
+    customer = db.query(models.Customer).filter(models.Customer.customer_id == updated.customer_id).first()
     if not customer:
         raise HTTPException(status_code=404, detail="User not found")
 

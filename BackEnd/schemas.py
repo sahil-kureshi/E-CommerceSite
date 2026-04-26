@@ -21,6 +21,13 @@ class CustomerResponse(CustomerBase):
     customer_id: int
     class Config:
         orm_mode = True
+        
+class LoginRequest(CustomerBase):
+    email: str
+    password: str
+    
+class CustomerUpdate(CustomerBase):
+    customer_id : int
 
 # --- Product Schemas ---
 class ProductBase(BaseModel):
