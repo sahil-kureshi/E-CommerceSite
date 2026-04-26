@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey, DECIMAL, DateTime
 from sqlalchemy.orm import relationship
 from database import Base
-from datetime import datetime
+from datetime import datetime, timezone
 
 class Customer(Base):
     __tablename__ = "customers"
@@ -10,7 +10,7 @@ class Customer(Base):
     email = Column(String(100), unique=True)
     phone = Column(String(15))
     address = Column(Text)
-    password = Column(String(255))
+    hashed_password = Column(String(255))
     orders = relationship("Order", back_populates="customer")
 
 class Product(Base):
@@ -27,7 +27,7 @@ class Order(Base):
     __tablename__ = "orders"
     order_id = Column(Integer, primary_key=True, index=True)
     customer_id = Column(Integer, ForeignKey("customers.customer_id"))
-    order_date = Column(DateTime, default=datetime.utcnow)
+    order_date = Column(DateTime, default=datetime.now(timezone.utc))
     status = Column(String(20))
     total_amount = Column(DECIMAL(10, 2))
     customer = relationship("Customer", back_populates="orders")
@@ -51,5 +51,5 @@ class Payment(Base):
     gateway_reference = Column(String(100))
     amount = Column(DECIMAL(10, 2))
     status = Column(String(20))
-    payment_date = Column(DateTime, default=datetime.utcnow)
+    payment_date = Column(DateTime, default=datetime.now(timezone.utc))
     order = relationship("Order", back_populates="payment")

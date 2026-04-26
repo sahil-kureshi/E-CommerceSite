@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-pydantic
-sqlalchemy
-python-dotenv
-python-jose[cryptography]
-razorpay
-passlib[bcrypt]
-pymysql

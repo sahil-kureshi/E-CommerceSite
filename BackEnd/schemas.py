@@ -12,23 +12,15 @@ class CustomerBase(BaseModel):
 class Customer(CustomerBase):
     customer_id: int
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class CustomerCreate(CustomerBase):
     password: str
 
 class CustomerResponse(CustomerBase):
     customer_id: int
-    
-        
-class LoginRequest(BaseModel):
-    email: str
-    password: str
-
-class CustomerUpdate(BaseModel):
-    name: Optional[str] = None
-    phone: Optional[str] = None
-    address: Optional[str] = None
+    class Config:
+        orm_mode = True
 
 # --- Product Schemas ---
 class ProductBase(BaseModel):
@@ -45,7 +37,16 @@ class ProductCreate(ProductBase):
 class ProductResponse(ProductBase):
     product_id: int
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+class Product(ProductBase):
+    product_id: int
+    class Config:
+        from_attributes = True
+        
+class ProductUpdate(ProductBase):
+    pass
+        
 
 # --- Order Schemas ---
 class OrderItemBase(BaseModel):
@@ -65,7 +66,12 @@ class OrderResponse(BaseModel):
     total_amount: float
     items: List[OrderItemBase]
     class Config:
-        orm_mode = True
+        from_attributes = True
+        
+class Order(OrderItemBase):
+    order_id: int
+    class Config:
+        from_attributes = True
 
 # --- Payment Schemas ---
 class PaymentBase(BaseModel):
@@ -78,7 +84,12 @@ class PaymentResponse(PaymentBase):
     payment_id: int
     payment_date: datetime
     class Config:
-        orm_mode = True
+        from_attributes = True
+        
+class Payment(PaymentBase):
+    payment_id: int
+    class Config:
+        from_attributes = True
         
         
 

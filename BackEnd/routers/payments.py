@@ -8,7 +8,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/payments",
+    tags=["Payments"]
+)
 
 # Razorpay client setup
 razorpay_client = razorpay.Client(auth=(os.getenv("RAZORPAY_KEY_ID"), os.getenv("RAZORPAY_KEY_SECRET")))
@@ -22,7 +25,7 @@ def create_payment(order_id: int, db: Session = Depends(get_db)):
 
     # Create Razorpay order
     razorpay_order = razorpay_client.order.create({
-        "amount": int(order.total_amount * 100),  # amount in paise
+        "amount": int(order.total_amount * 100),  # amount in Paise
         "currency": "INR",
         "payment_capture": "1"
     })

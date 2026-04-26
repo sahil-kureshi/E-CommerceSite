@@ -10,7 +10,7 @@ router = APIRouter(
 )
 
 # Create new order
-@router.post("/", response_model=schemas.Order)
+@router.post("", response_model=schemas.OrderResponse)
 def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db)):
     new_order = models.Order(
         customer_id=order.customer_id,
@@ -35,13 +35,13 @@ def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db)):
     return new_order
 
 # Get all orders for logged-in customer
-@router.get("/me", response_model=List[schemas.Order])
+@router.get("/me", response_model=List[schemas.OrderResponse])
 def get_my_orders(customer_id: int, db: Session = Depends(get_db)):
     orders = db.query(models.Order).filter(models.Order.customer_id == customer_id).all()
     return orders
 
 # Get single order by ID
-@router.get("/{order_id}", response_model=schemas.Order)
+@router.get("/{order_id}", response_model=schemas.OrderResponse)
 def get_order(order_id: int, db: Session = Depends(get_db)):
     order = db.query(models.Order).filter(models.Order.order_id == order_id).first()
     if not order:
@@ -49,7 +49,7 @@ def get_order(order_id: int, db: Session = Depends(get_db)):
     return order
 
 # Update order status (Admin or system)
-@router.put("/{order_id}/status", response_model=schemas.Order)
+@router.put("/{order_id}/status", response_model=schemas.OrderResponse)
 def update_order_status(order_id: int, status: str, db: Session = Depends(get_db)):
     order = db.query(models.Order).filter(models.Order.order_id == order_id).first()
     if not order:

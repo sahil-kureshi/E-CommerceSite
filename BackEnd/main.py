@@ -1,11 +1,11 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
-from routers.customers import get_current_user
+from routers.customers import get_current_customer
 from database import SessionLocal, engine
 import models
 from config import settings
-from routers import auth
+from routers import auth, customers, orders, payments, products
 
 models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
@@ -33,6 +33,14 @@ def get_db():
 
 
 app.include_router(auth.router)
+app.include_router(customers.router)
+app.include_router(orders.router)
+app.include_router(payments.router)
+app.include_router(products.router)
+
+
+
+'''
 
 @app.get("/products")
 def list_products(db: Session = Depends(get_db)):
@@ -52,7 +60,8 @@ def create_order(order_data: dict, db: Session = Depends(get_db)):
     return {"order_id": new_order.order_id, "status": "Created"}
 
 
-
 @app.get("/orders/me")
-def get_my_orders(current_user: models.Customer = Depends(get_current_user), db: Session = Depends(get_db)):
-    return db.query(models.Order).filter(models.Order.customer_id == current_user.customer_id).all()
+def get_my_orders(current_customer: models.Customer = Depends(get_current_customer), db: Session = Depends(get_db)):
+    return db.query(models.Order).filter(models.Order.customer_id == current_customer.customer_id).all()
+    
+    '''
