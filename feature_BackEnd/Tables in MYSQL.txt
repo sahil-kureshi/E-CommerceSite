@@ -1,0 +1,79 @@
+-- Customers Table
+
+CREATE TABLE Customers (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(15),
+    address TEXT,
+    hashed_password VARCHAR(255)
+);
+
+
+
+-- Products Table
+CREATE TABLE Products (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    category VARCHAR(50),
+    price DECIMAL(10,2),
+    stock INT,
+    description TEXT,
+    image_url VARCHAR(255)
+);
+
+
+
+-- Orders Table
+CREATE TABLE Orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(20),
+    total_amount DECIMAL(10,2),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);
+
+
+
+-- Order_Items Table
+CREATE TABLE Order_Items (
+    order_item_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    price DECIMAL(10,2),
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+);
+
+
+
+-- Payments Table
+CREATE TABLE Payments (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    gateway_reference VARCHAR(100),
+    amount DECIMAL(10,2),
+    status VARCHAR(20),
+    payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id)
+);
+
+
+
+✅ Notes
+- All foreign keys enforce referential integrity.
+- hashed_password should be stored using bcrypt or argon2 in your FastAPI backend.
+- You can add indexes on email, order_date, or category for performance.
+- Later, you can extend this schema with tables for reviews, wishlist, shipping, etc.
+Would you like me to help you write the FastAPI models and endpoints that connect to this schema using SQLAlchemy? That way, you can start building your backend right away.
+
+CREATE TABLE Customers (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(15),
+    address TEXT,
+    hashed_password VARCHAR(255)
+);
