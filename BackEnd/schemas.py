@@ -20,14 +20,14 @@ class CustomerCreate(CustomerBase):
 class CustomerResponse(CustomerBase):
     customer_id: int
     class Config:
-        orm_mode = True
+        from_attributes = True
         
-class LoginRequest(CustomerBase):
+class LoginRequest(BaseModel):
     email: str
     password: str
     
 class CustomerUpdate(CustomerBase):
-    customer_id : int
+    pass
 
 # --- Product Schemas ---
 class ProductBase(BaseModel):

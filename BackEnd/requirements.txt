@@ -7,3 +7,5 @@ python-jose[cryptography]
 razorpay
 passlib[bcrypt]
 pymysql
+pydantic-settings
+argon2_cffi
