@@ -1,7 +1,6 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
-from routers.customers import get_current_customer
 from database import SessionLocal, engine
 import models
 from config import settings

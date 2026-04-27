@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey, DECIMAL, DateTime
+from sqlalchemy import Column, Integer, String, Boolean, Text, ForeignKey, DECIMAL, DateTime
 from sqlalchemy.orm import relationship
 from database import Base
 from datetime import datetime, timezone
@@ -11,6 +11,8 @@ class Customer(Base):
     phone = Column(String(15))
     address = Column(Text)
     password = Column(String(255))
+    #role = Column(String)
+    #is_active = Column(Boolean, default=True)
     orders = relationship("Order", back_populates="customer")
 
 class Product(Base):

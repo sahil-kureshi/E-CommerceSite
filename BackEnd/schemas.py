@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime
+from config import Settings
 
 # --- Customer Schemas ---
 class CustomerBase(BaseModel):
@@ -11,16 +12,14 @@ class CustomerBase(BaseModel):
 
 class Customer(CustomerBase):
     customer_id: int
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 class CustomerCreate(CustomerBase):
     password: str
 
 class CustomerResponse(CustomerBase):
     customer_id: int
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
         
 class LoginRequest(BaseModel):
     email: str
@@ -43,13 +42,11 @@ class ProductCreate(ProductBase):
 
 class ProductResponse(ProductBase):
     product_id: int
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 class Product(ProductBase):
     product_id: int
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
         
 class ProductUpdate(ProductBase):
     pass
@@ -72,13 +69,11 @@ class OrderResponse(BaseModel):
     status: str
     total_amount: float
     items: List[OrderItemBase]
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
         
 class Order(OrderItemBase):
     order_id: int
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 # --- Payment Schemas ---
 class PaymentBase(BaseModel):
@@ -90,13 +85,11 @@ class PaymentBase(BaseModel):
 class PaymentResponse(PaymentBase):
     payment_id: int
     payment_date: datetime
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
         
 class Payment(PaymentBase):
     payment_id: int
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
         
         
 
