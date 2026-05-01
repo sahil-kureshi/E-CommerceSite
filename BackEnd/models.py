@@ -11,8 +11,7 @@ class Customer(Base):
     phone = Column(String(15))
     address = Column(Text)
     password = Column(String(255))
-    #role = Column(String)
-    #is_active = Column(Boolean, default=True)
+    role = Column(String(255))
     orders = relationship("Order", back_populates="customer")
 
 class Product(Base):

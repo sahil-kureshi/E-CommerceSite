@@ -9,10 +9,11 @@ class CustomerBase(BaseModel):
     email: str
     phone: Optional[str] = None
     address: Optional[str] = None
+    role: Optional[str] = None
 
-class Customer(CustomerBase):
-    customer_id: int
-    model_config = {"from_attributes": True}
+#class Customer(CustomerBase):
+#    customer_id: int
+#    model_config = {"from_attributes": True}
 
 class CustomerCreate(CustomerBase):
     password: str

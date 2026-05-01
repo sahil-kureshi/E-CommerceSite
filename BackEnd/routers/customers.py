@@ -12,14 +12,15 @@ router = APIRouter(
     tags=["Customers"]
 )
 
+'''
 @router.post("/signup")
-def signup(name: str, email: str, password: str, db: Session = Depends(get_db)):
+def signup(name: str, email: str, password: str, db: db_dependency):
     existing_user = db.query(models.Customer).filter(models.Customer.email == email).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
     
     hashed_pw = hash_password(password)
-    new_customer = models.Customer(name=name, email=email, hashed_password=hashed_pw)
+    new_customer = models.Customer(name=name, email=email, password=hashed_pw)
     db.add(new_customer)
     db.commit()
     db.refresh(new_customer)
@@ -28,7 +29,7 @@ def signup(name: str, email: str, password: str, db: Session = Depends(get_db)):
 
 
 @router.post("/login")
-def login(credentials: schemas.LoginRequest, db: Session = Depends(get_db)):
+def login(credentials: schemas.LoginRequest, db: db_dependency):
     customer = db.query(models.Customer).filter(models.Customer.email == credentials.email).first()
     if not customer or not verify_password(credentials.password, customer.password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
@@ -40,7 +41,7 @@ def login(credentials: schemas.LoginRequest, db: Session = Depends(get_db)):
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="customers/login")
 
-def get_current_customer(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+def get_current_customer(db: db_dependency, token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(token, settings.JWT_SECRET, algorithms=[settings.JWT_ALGORITHM])
         email: str = payload.get("sub")
@@ -54,3 +55,4 @@ def get_current_customer(token: str = Depends(oauth2_scheme), db: Session = Depe
         raise HTTPException(status_code=401, detail="User not found")
     return customer
 
+'''

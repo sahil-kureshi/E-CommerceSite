@@ -1,10 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException
+from typing import Annotated, TypeAlias
 from sqlalchemy.orm import Session
 from database import get_db
 import models, schemas
 import razorpay
 import os
 from dotenv import load_dotenv
+from .auth import *
+
+customer_dependency: TypeAlias = Annotated[dict, Depends(get_current_customer)]
 
 load_dotenv()
 
@@ -17,7 +21,9 @@ router = APIRouter(
 razorpay_client = razorpay.Client(auth=(os.getenv("RAZORPAY_KEY_ID"), os.getenv("RAZORPAY_KEY_SECRET")))
 
 @router.post("/create-payment")
-def create_payment(order_id: int, db: Session = Depends(get_db)):
+def create_payment(order_id: int, customer: customer_dependency , db: db_dependency):
+    if customer is None:
+        raise HTTPException(status_code=401, detail='Authentication Failed')
     # Fetch order details
     order = db.query(models.Order).filter(models.Order.order_id == order_id).first()
     if not order:
@@ -44,7 +50,10 @@ def create_payment(order_id: int, db: Session = Depends(get_db)):
     return {"razorpay_order_id": razorpay_order["id"], "amount": order.total_amount}
 
 @router.post("/verify-payment")
-def verify_payment(payment_id: str, razorpay_payment_id: str, razorpay_signature: str, db: Session = Depends(get_db)):
+def verify_payment(payment_id: str, razorpay_payment_id: str, razorpay_signature: str,
+                   customer: customer_dependency , db: db_dependency):
+    if customer is None:
+        raise HTTPException(status_code=401, detail='Authentication Failed')
     # Verify signature
     try:
         razorpay_client.utility.verify_payment_signature({
